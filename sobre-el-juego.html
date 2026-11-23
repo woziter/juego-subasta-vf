@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#24120d" />
+  <meta name="description" content="Conocé Subasta Ciega Argentina: un juego multijugador de reliquias ocultas, pujas y sorpresas." />
+  <title>Sobre el juego | Subasta Ciega Argentina</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;6..96,700&family=Roboto+Slab:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --gold: #f0ca78;
+      --gold-soft: #d7b674;
+      --paper: #eadfc9;
+      --muted: #b7a486;
+      --panel: rgba(31, 16, 12, .88);
+      --line: rgba(240, 202, 120, .25);
+      --serif: "Bodoni Moda", Georgia, serif;
+      --body: "Roboto Slab", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 50% 10%, rgba(201, 133, 62, .2), transparent 48%),
+        linear-gradient(180deg, rgba(30, 12, 8, .26), rgba(17, 8, 6, .82)),
+        url("./public/textures/madera-caoba.svg") center top / cover fixed,
+        #24120d;
+      color: var(--paper);
+      font: 16px/1.65 var(--body);
+    }
+
+    a { color: inherit; }
+
+    .page { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      color: var(--gold);
+      font: 600 13px/1.2 var(--body);
+      letter-spacing: .14em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .topbar-note {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(240px, .7fr);
+      align-items: center;
+      gap: clamp(32px, 7vw, 88px);
+      padding: clamp(64px, 10vw, 112px) 0 76px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--gold-soft);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 720px;
+      margin-bottom: 18px;
+      color: var(--gold);
+      font: 600 clamp(54px, 8vw, 100px)/.98 var(--serif);
+      letter-spacing: -.045em;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, .35);
+    }
+
+    h1 span { display: block; color: var(--paper); }
+
+    .hero-copy {
+      max-width: 640px;
+      margin-bottom: 28px;
+      color: #e0d1b6;
+      font-size: clamp(16px, 2vw, 19px);
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 218, 137, .65);
+      border-radius: 7px;
+      padding: 10px 18px;
+      background:
+        linear-gradient(180deg, rgba(227, 168, 76, .35), rgba(69, 29, 15, .55)),
+        url("./public/textures/madera-caoba.svg") center / cover;
+      box-shadow: inset 0 1px rgba(255, 239, 204, .25), 0 4px 0 #170905;
+      color: #fff0d0;
+      font: 600 13px var(--body);
+      text-decoration: none;
+      transition: transform .16s ease, filter .16s ease;
+    }
+
+    .button:hover { filter: brightness(1.13); transform: translateY(-2px); }
+    .button-secondary { border-color: var(--line); background: rgba(28, 15, 11, .75); }
+
+    .lot-card {
+      position: relative;
+      display: grid;
+      min-height: 300px;
+      align-content: space-between;
+      overflow: hidden;
+      border: 1px solid rgba(240, 202, 120, .42);
+      border-radius: 8px;
+      padding: 20px;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(240, 202, 120, .13), transparent 42%),
+        linear-gradient(145deg, rgba(123, 66, 34, .6), rgba(28, 12, 9, .92)),
+        url("./public/textures/madera-caoba.svg") center / cover;
+      box-shadow: inset 0 0 0 5px rgba(240, 202, 120, .05), 0 24px 55px rgba(0, 0, 0, .35);
+      text-align: center;
+    }
+
+    .lot-card::before {
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(240, 202, 120, .18);
+      content: "";
+      pointer-events: none;
+    }
+
+    .lot-label, .lot-footer { position: relative; z-index: 1; }
+    .lot-label { color: var(--gold-soft); font-size: 10px; letter-spacing: .16em; }
+    .lot-mark {
+      position: relative;
+      display: grid;
+      width: 136px;
+      height: 136px;
+      place-items: center;
+      justify-self: center;
+      border: 1px solid rgba(240, 202, 120, .3);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240, 202, 120, .08), transparent 70%);
+      color: var(--gold);
+      font: 500 76px/1 var(--serif);
+      text-shadow: 0 0 28px rgba(240, 202, 120, .3);
+    }
+
+    .lot-footer { display: grid; gap: 4px; color: var(--muted); font-size: 11px; }
+    .lot-footer strong { color: var(--paper); font-size: 14px; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat {
+      padding: 22px 18px;
+      text-align: center;
+    }
+
+    .stat + .stat { border-left: 1px solid var(--line); }
+    .stat strong { display: block; color: var(--gold); font: 600 27px/1.2 var(--serif); }
+    .stat span { color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+
+    section.content-section { padding: 76px 0 0; }
+
+    .section-heading { max-width: 720px; margin-bottom: 28px; }
+    .section-heading h2 {
+      margin-bottom: 10px;
+      color: var(--gold);
+      font: 600 clamp(30px, 4vw, 42px)/1.1 var(--serif);
+    }
+    .section-heading p { margin-bottom: 0; color: var(--muted); }
+
+    .about-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: clamp(22px, 4vw, 38px);
+      background: var(--panel);
+      box-shadow: 0 16px 38px rgba(0, 0, 0, .22);
+    }
+
+    .about-panel p:last-child { margin-bottom: 0; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .feature {
+      min-height: 190px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 22px;
+      background: linear-gradient(145deg, rgba(63, 34, 22, .9), rgba(24, 13, 10, .93));
+    }
+
+    .feature-number { color: var(--gold-soft); font-size: 11px; letter-spacing: .12em; }
+    .feature h3 { margin: 14px 0 8px; color: var(--paper); font: 600 18px/1.25 var(--body); }
+    .feature p { margin-bottom: 0; color: var(--muted); font-size: 13px; }
+
+    .modes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mode-card {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 24px;
+      background: rgba(26, 13, 10, .84);
+    }
+
+    .mode-card h3 { margin-bottom: 8px; color: var(--gold); font: 600 20px var(--serif); }
+    .mode-card p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+
+    .creator {
+      margin-top: 78px;
+      border-top: 1px solid var(--line);
+      padding: 28px 0 38px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .creator strong { color: var(--gold); font-weight: 600; }
+
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; padding: 58px 0 54px; }
+      .lot-card { min-height: 240px; }
+      .lot-mark { width: 110px; height: 110px; font-size: 62px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature { min-height: 0; }
+    }
+
+    @media (max-width: 520px) {
+      .page { width: min(100% - 28px, 1120px); }
+      .topbar { padding: 18px 0; }
+      .topbar-note { max-width: 140px; font-size: 9px; }
+      .hero { padding-top: 48px; }
+      h1 { font-size: clamp(48px, 16vw, 72px); }
+      .stats { grid-template-columns: 1fr; }
+      .stat { padding: 15px; }
+      .stat + .stat { border-top: 1px solid var(--line); border-left: 0; }
+      .modes { grid-template-columns: 1fr; }
+      section.content-section { padding-top: 58px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page topbar">
+    <a class="brand" href="#inicio">Subasta · Ciega</a>
+    <span class="topbar-note">Un juego de subastas argentinas</span>
+  </header>
+
+  <main class="page" id="inicio">
+    <section class="hero" aria-labelledby="main-title">
+      <div>
+        <span class="eyebrow">Archivo nacional · sala de subastas</span>
+        <h1 id="main-title">Subasta <span>Ciega</span></h1>
+        <p class="hero-copy">Reliquias argentinas, apuestas a ciegas. Cada lote es un misterio: la estrategia está en decidir cuánto vale algo que todavía no conocés.</p>
+        <div class="hero-actions">
+          <a class="button" href="#como-se-juega">Conocer el juego</a>
+          <a class="button button-secondary" href="#sobre-el-proyecto">Sobre el proyecto</a>
+        </div>
+      </div>
+      <aside class="lot-card" aria-label="Ilustración de un lote secreto">
+        <span class="lot-label">LOTE · 01</span>
+        <span class="lot-mark" aria-hidden="true">?</span>
+        <span class="lot-footer"><strong>Una pieza por descubrir</strong>¿Reliquia invaluable o gran decepción?</span>
+      </aside>
+    </section>
+
+    <section class="stats" aria-label="Datos de la partida">
+      <div class="stat"><strong>15</strong><span>lotes por partida</span></div>
+      <div class="stat"><strong>2–8</strong><span>jugadores</span></div>
+      <div class="stat"><strong>$1.000.000</strong><span>saldo inicial por jugador</span></div>
+    </section>
+
+    <section class="content-section" id="sobre-el-proyecto" aria-labelledby="about-title">
+      <div class="section-heading">
+        <span class="eyebrow">¿De qué trata?</span>
+        <h2 id="about-title">Una subasta donde nadie conoce toda la historia</h2>
+      </div>
+      <div class="about-panel">
+        <p><strong>Subasta Ciega Argentina</strong> es un juego multijugador en tiempo real. Los participantes compiten por lotes ocultos: antes de ofertar pueden ver una silueta, que incluso puede ser un señuelo, pero no saben con certeza qué objeto están comprando ni cuánto vale.</p>
+        <p>Cuando se cierra la puja, se revela la pieza y el mejor postor se la lleva. A partir de ahí, cada decisión cuenta: conservarla, pagar un peritaje para descubrir su valor real o venderla. Al final de la partida, gana quien haya reunido el mayor patrimonio entre efectivo y objetos.</p>
+      </div>
+    </section>
+
+    <section class="content-section" id="como-se-juega" aria-labelledby="play-title">
+      <div class="section-heading">
+        <span class="eyebrow">La partida</span>
+        <h2 id="play-title">Observar, ofertar y descubrir</h2>
+        <p>Una partida combina intuición, estrategia y sorpresas en quince lotes.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature">
+          <span class="feature-number">01 · ELEGÍ</span>
+          <h3>Entrá a una sala</h3>
+          <p>Creá una partida pública o privada, invitá amigos y elegí el modo de contenido. También se pueden sumar bots para completar lugares.</p>
+        </article>
+        <article class="feature">
+          <span class="feature-number">02 · OFERTÁ</span>
+          <h3>Jugátela por el lote</h3>
+          <p>La subasta clásica dura 20 segundos. La primera oferta es de $50.000 y cada puja aumenta $25.000. Administrá el saldo: cada apuesta puede cambiar la partida.</p>
+        </article>
+        <article class="feature">
+          <span class="feature-number">03 · REVELÁ</span>
+          <h3>Descubrí qué ganaste</h3>
+          <p>Al cerrar el lote aparece el objeto real. Peritalo por $25.000 para conocer su multiplicador o vendelo por el valor que corresponda.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="collection-title">
+      <div class="section-heading">
+        <span class="eyebrow">Un catálogo con identidad</span>
+        <h2 id="collection-title">De piezas históricas a objetos inesperados</h2>
+        <p>El catálogo reúne 133 objetos: cultura e historia argentina, fútbol, rock nacional, política y hallazgos tan absurdos como memorables.</p>
+      </div>
+      <div class="modes">
+        <article class="mode-card">
+          <h3>Subasta clásica</h3>
+          <p>Ofertá con los controles de la pantalla y seguí las apuestas de tus rivales hasta que cierre el reloj.</p>
+        </article>
+        <article class="mode-card">
+          <h3>Subasta por voz</h3>
+          <p>Decí tu oferta en voz alta. El reconocimiento funciona en español en tu dispositivo; el tono puede modificar la oferta efectiva según las reglas del modo.</p>
+        </article>
+        <article class="mode-card">
+          <h3>Peritaje y venta</h3>
+          <p>Un peritaje puede multiplicar el valor del objeto por ×0,1, ×0,5, ×1,5 o ×3. Después podés conservarlo o venderlo para hacer crecer tu capital.</p>
+        </article>
+        <article class="mode-card">
+          <h3>Un podio final</h3>
+          <p>Al terminar los quince lotes, el inventario y el efectivo determinan el patrimonio de cada jugador. Los tres mejores suben al podio.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="content-title">
+      <div class="section-heading">
+        <span class="eyebrow">Elegí el tono de la partida</span>
+        <h2 id="content-title">Dos opciones de contenido</h2>
+      </div>
+      <div class="modes">
+        <article class="mode-card">
+          <h3>Para toda la familia</h3>
+          <p>Usa el conjunto de objetos aptos para todo público.</p>
+        </article>
+        <article class="mode-card">
+          <h3>Sin límites</h3>
+          <p>Incluye objetos y temas polémicos o sensibles. La sala muestra advertencias antes de comenzar.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page creator" id="creditos">
+    Un proyecto creado por <strong>Iván Ruiz Díaz</strong> · Subasta Ciega Argentina
+  </footer>
+</body>
+</html>

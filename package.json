@@ -1,0 +1,22 @@
+{
+  "name": "subasta-ciega-argentina",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Subasta multijugador en tiempo real de reliquias argentinas.",
+  "main": "backend/server.js",
+  "scripts": {
+    "prestart": "node scripts/ensure-voice-model.js",
+    "start": "node backend/server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "adm-zip": "^0.6.1",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1",
+    "tar": "^7.5.23",
+    "vosk-browser": "^0.0.8"
+  }
+}
